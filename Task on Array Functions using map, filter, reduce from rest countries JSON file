@@ -1,0 +1,495 @@
+Solving problems using Array functions on rest countries data
+==============================================================
+
+//Questions have been commented and output is shown below individually for a,b,c,d,e
+
+Code:
+====
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        var request=new XMLHttpRequest()
+        request.open("GET","https://restcountries.com/v2/all")
+        request.send()
+        request.onload=function(){
+            var data=JSON.parse(request.response)
+
+            console.log(data)
+ // a.get all the countries from Asia continent using filter function
+ 
+ //1st way
+ let resultA = data.filter(({element,region})=>region=="Asia")
+
+ console.log(resultA.map((element)=>element.name))
+
+//2nd way - getting output in single line
+console.log(data.filter(({element,region})=>region=="Asia").map((element)=>element.name))
+     
+//b.get all the countries with population<2 Lakh using filter function
+console.log("Population less than 2 lakh")
+// let resultB = data.filter(({element,population})=>population<200000)
+// console.log(resultB)
+ console.log(data.filter(({element,population})=>population<200000).map((element)=>element.name))
+
+//c.print name,capital,flag using for each
+
+//1st way
+data.forEach(({element,name}) =>{console.log(name)});
+
+ data.forEach(({element,capital})=>{console.log(capital)});
+
+ data.forEach(({element,flag})=>{console.log(flag)});
+
+//2nd way
+data.forEach(({element,name,capital,flag})=>
+{
+    console.log(name,capital,flag)
+})
+
+//d.print total population using reduce
+
+console.log(data.reduce((acc,cv)=>acc+cv.population,0))
+
+//e.print country that user US dollars as currency
+
+const countriesWithUSD = data.filter(country =>
+country.currencies && country.currencies.find(curr => curr.code === 'USD')
+    );
+    // console.log(countriesWithUSD)
+
+    const namesWithUSD = countriesWithUSD.map(country => country.name);
+    console.log(namesWithUSD);
+
+
+Outputs:
+=======
+a
+====
+0
+: 
+"Afghanistan"
+1
+: 
+"Armenia"
+2
+: 
+"Azerbaijan"
+3
+: 
+"Bahrain"
+4
+: 
+"Bangladesh"
+5
+: 
+"Bhutan"
+6
+: 
+"Brunei Darussalam"
+7
+: 
+"Cambodia"
+8
+: 
+"China"
+9
+: 
+"Georgia"
+10
+: 
+"Hong Kong"
+11
+: 
+"India"
+12
+: 
+"Indonesia"
+13
+: 
+"Iran (Islamic Republic of)"
+14
+: 
+"Iraq"
+15
+: 
+"Israel"
+16
+: 
+"Japan"
+17
+: 
+"Jordan"
+18
+: 
+"Kazakhstan"
+19
+: 
+"Kuwait"
+20
+: 
+"Kyrgyzstan"
+21
+: 
+"Lao People's Democratic Republic"
+22
+: 
+"Lebanon"
+23
+: 
+"Macao"
+24
+: 
+"Malaysia"
+25
+: 
+"Maldives"
+26
+: 
+"Mongolia"
+27
+: 
+"Myanmar"
+28
+: 
+"Nepal"
+29
+: 
+"Korea (Democratic People's Republic of)"
+30
+: 
+"Oman"
+31
+: 
+"Pakistan"
+32
+: 
+"Palestine, State of"
+33
+: 
+"Philippines"
+34
+: 
+"Qatar"
+35
+: 
+"Saudi Arabia"
+36
+: 
+"Singapore"
+37
+: 
+"Korea (Republic of)"
+38
+: 
+"Sri Lanka"
+39
+: 
+"Syrian Arab Republic"
+40
+: 
+"Taiwan"
+41
+: 
+"Tajikistan"
+42
+: 
+"Thailand"
+43
+: 
+"Timor-Leste"
+44
+: 
+"Turkey"
+45
+: 
+"Turkmenistan"
+46
+: 
+"United Arab Emirates"
+47
+: 
+"Uzbekistan"
+48
+: 
+"Vietnam"
+49
+: 
+"Yemen"
+length
+: 
+50
+
+b
+===
+
+ArrayfunctionsTask.html:31 (62) ['Åland Islands', 'American Samoa', 'Andorra', 'Anguilla', 'Antarctica', 'Antigua and Barbuda', 'Aruba', 'Bermuda', 'Bonaire, Sint Eustatius and Saba', 'Bouvet Island', 'British Indian Ocean Territory', 'United States Minor Outlying Islands', 'Virgin Islands (British)', 'Virgin Islands (U.S.)', 'Cayman Islands', 'Christmas Island', 'Cocos (Keeling) Islands', 'Cook Islands', 'Curaçao', 'Dominica', 'Falkland Islands (Malvinas)', 'Faroe Islands', 'French Southern Territories', 'Gibraltar', 'Greenland', 'Grenada', 'Guam', 'Guernsey', 'Heard Island and McDonald Islands', 'Vatican City', 'Isle of Man', 'Jersey', 'Kiribati', 'Liechtenstein', 'Marshall Islands', 'Micronesia (Federated States of)', 'Monaco', 'Montserrat', 'Nauru', 'Niue', 'Norfolk Island', 'Northern Mariana Islands', 'Palau', 'Pitcairn', 'Saint Barthélemy', 'Saint Helena, Ascension and Tristan da Cunha', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Martin (French part)', 'Saint Pierre and Miquelon', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'Seychelles', 'Sint Maarten (Dutch part)', 'South Georgia and the South Sandwich Islands', 'Svalbard and Jan Mayen', 'Tokelau', 'Tonga', 'Turks and Caicos Islands', 'Tuvalu', 'Wallis and Futuna']
+
+c
+===
+ArrayfunctionsTask.html:44 Afghanistan Kabul https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_the_Taliban.svg
+ArrayfunctionsTask.html:44 Åland Islands Mariehamn https://flagcdn.com/ax.svg
+ArrayfunctionsTask.html:44 Albania Tirana https://flagcdn.com/al.svg
+ArrayfunctionsTask.html:44 Algeria Algiers https://flagcdn.com/dz.svg
+ArrayfunctionsTask.html:44 American Samoa Pago Pago https://flagcdn.com/as.svg
+ArrayfunctionsTask.html:44 Andorra Andorra la Vella https://flagcdn.com/ad.svg
+ArrayfunctionsTask.html:44 Angola Luanda https://flagcdn.com/ao.svg
+ArrayfunctionsTask.html:44 Anguilla The Valley https://flagcdn.com/ai.svg
+ArrayfunctionsTask.html:44 Antarctica undefined https://flagcdn.com/aq.svg
+ArrayfunctionsTask.html:44 Antigua and Barbuda Saint John's https://flagcdn.com/ag.svg
+ArrayfunctionsTask.html:44 Argentina Buenos Aires https://flagcdn.com/ar.svg
+ArrayfunctionsTask.html:44 Armenia Yerevan https://flagcdn.com/am.svg
+ArrayfunctionsTask.html:44 Aruba Oranjestad https://flagcdn.com/aw.svg
+ArrayfunctionsTask.html:44 Australia Canberra https://flagcdn.com/au.svg
+ArrayfunctionsTask.html:44 Austria Vienna https://flagcdn.com/at.svg
+ArrayfunctionsTask.html:44 Azerbaijan Baku https://flagcdn.com/az.svg
+ArrayfunctionsTask.html:44 Bahamas Nassau https://flagcdn.com/bs.svg
+ArrayfunctionsTask.html:44 Bahrain Manama https://flagcdn.com/bh.svg
+ArrayfunctionsTask.html:44 Bangladesh Dhaka https://flagcdn.com/bd.svg
+ArrayfunctionsTask.html:44 Barbados Bridgetown https://flagcdn.com/bb.svg
+ArrayfunctionsTask.html:44 Belarus Minsk https://flagcdn.com/by.svg
+ArrayfunctionsTask.html:44 Belgium Brussels https://flagcdn.com/be.svg
+ArrayfunctionsTask.html:44 Belize Belmopan https://flagcdn.com/bz.svg
+ArrayfunctionsTask.html:44 Benin Porto-Novo https://flagcdn.com/bj.svg
+ArrayfunctionsTask.html:44 Bermuda Hamilton https://flagcdn.com/bm.svg
+ArrayfunctionsTask.html:44 Bhutan Thimphu https://flagcdn.com/bt.svg
+ArrayfunctionsTask.html:44 Bolivia (Plurinational State of) Sucre https://flagcdn.com/bo.svg
+ArrayfunctionsTask.html:44 Bonaire, Sint Eustatius and Saba Kralendijk https://flagcdn.com/bq.svg
+ArrayfunctionsTask.html:44 Bosnia and Herzegovina Sarajevo https://flagcdn.com/ba.svg
+ArrayfunctionsTask.html:44 Botswana Gaborone https://flagcdn.com/bw.svg
+ArrayfunctionsTask.html:44 Bouvet Island undefined https://flagcdn.com/bv.svg
+ArrayfunctionsTask.html:44 Brazil Brasília https://flagcdn.com/br.svg
+ArrayfunctionsTask.html:44 British Indian Ocean Territory Diego Garcia https://flagcdn.com/io.svg
+ArrayfunctionsTask.html:44 United States Minor Outlying Islands undefined https://flagcdn.com/um.svg
+ArrayfunctionsTask.html:44 Virgin Islands (British) Road Town https://flagcdn.com/vg.svg
+ArrayfunctionsTask.html:44 Virgin Islands (U.S.) Charlotte Amalie https://flagcdn.com/vi.svg
+ArrayfunctionsTask.html:44 Brunei Darussalam Bandar Seri Begawan https://flagcdn.com/bn.svg
+ArrayfunctionsTask.html:44 Bulgaria Sofia https://flagcdn.com/bg.svg
+ArrayfunctionsTask.html:44 Burkina Faso Ouagadougou https://flagcdn.com/bf.svg
+ArrayfunctionsTask.html:44 Burundi Gitega https://flagcdn.com/bi.svg
+ArrayfunctionsTask.html:44 Cambodia Phnom Penh https://flagcdn.com/kh.svg
+ArrayfunctionsTask.html:44 Cameroon Yaoundé https://flagcdn.com/cm.svg
+ArrayfunctionsTask.html:44 Canada Ottawa https://flagcdn.com/ca.svg
+ArrayfunctionsTask.html:44 Cabo Verde Praia https://flagcdn.com/cv.svg
+ArrayfunctionsTask.html:44 Cayman Islands George Town https://flagcdn.com/ky.svg
+ArrayfunctionsTask.html:44 Central African Republic Bangui https://flagcdn.com/cf.svg
+ArrayfunctionsTask.html:44 Chad N'Djamena https://flagcdn.com/td.svg
+ArrayfunctionsTask.html:44 Chile Santiago https://flagcdn.com/cl.svg
+ArrayfunctionsTask.html:44 China Beijing https://flagcdn.com/cn.svg
+ArrayfunctionsTask.html:44 Christmas Island Flying Fish Cove https://flagcdn.com/cx.svg
+ArrayfunctionsTask.html:44 Cocos (Keeling) Islands West Island https://flagcdn.com/cc.svg
+ArrayfunctionsTask.html:44 Colombia Bogotá https://flagcdn.com/co.svg
+ArrayfunctionsTask.html:44 Comoros Moroni https://flagcdn.com/km.svg
+ArrayfunctionsTask.html:44 Congo Brazzaville https://flagcdn.com/cg.svg
+ArrayfunctionsTask.html:44 Congo (Democratic Republic of the) Kinshasa https://flagcdn.com/cd.svg
+ArrayfunctionsTask.html:44 Cook Islands Avarua https://flagcdn.com/ck.svg
+ArrayfunctionsTask.html:44 Costa Rica San José https://flagcdn.com/cr.svg
+ArrayfunctionsTask.html:44 Croatia Zagreb https://flagcdn.com/hr.svg
+ArrayfunctionsTask.html:44 Cuba Havana https://flagcdn.com/cu.svg
+ArrayfunctionsTask.html:44 Curaçao Willemstad https://flagcdn.com/cw.svg
+ArrayfunctionsTask.html:44 Cyprus Nicosia https://flagcdn.com/cy.svg
+ArrayfunctionsTask.html:44 Czech Republic Prague https://flagcdn.com/cz.svg
+ArrayfunctionsTask.html:44 Denmark Copenhagen https://flagcdn.com/dk.svg
+ArrayfunctionsTask.html:44 Djibouti Djibouti https://flagcdn.com/dj.svg
+ArrayfunctionsTask.html:44 Dominica Roseau https://flagcdn.com/dm.svg
+ArrayfunctionsTask.html:44 Dominican Republic Santo Domingo https://flagcdn.com/do.svg
+ArrayfunctionsTask.html:44 Ecuador Quito https://flagcdn.com/ec.svg
+ArrayfunctionsTask.html:44 Egypt Cairo https://flagcdn.com/eg.svg
+ArrayfunctionsTask.html:44 El Salvador San Salvador https://flagcdn.com/sv.svg
+ArrayfunctionsTask.html:44 Equatorial Guinea Malabo https://flagcdn.com/gq.svg
+ArrayfunctionsTask.html:44 Eritrea Asmara https://flagcdn.com/er.svg
+ArrayfunctionsTask.html:44 Estonia Tallinn https://flagcdn.com/ee.svg
+ArrayfunctionsTask.html:44 Ethiopia Addis Ababa https://flagcdn.com/et.svg
+ArrayfunctionsTask.html:44 Falkland Islands (Malvinas) Stanley https://flagcdn.com/fk.svg
+ArrayfunctionsTask.html:44 Faroe Islands Tórshavn https://flagcdn.com/fo.svg
+ArrayfunctionsTask.html:44 Fiji Suva https://flagcdn.com/fj.svg
+ArrayfunctionsTask.html:44 Finland Helsinki https://flagcdn.com/fi.svg
+ArrayfunctionsTask.html:44 France Paris https://flagcdn.com/fr.svg
+ArrayfunctionsTask.html:44 French Guiana Cayenne https://flagcdn.com/gf.svg
+ArrayfunctionsTask.html:44 French Polynesia Papeetē https://flagcdn.com/pf.svg
+ArrayfunctionsTask.html:44 French Southern Territories Port-aux-Français https://flagcdn.com/tf.svg
+ArrayfunctionsTask.html:44 Gabon Libreville https://flagcdn.com/ga.svg
+ArrayfunctionsTask.html:44 Gambia Banjul https://flagcdn.com/gm.svg
+ArrayfunctionsTask.html:44 Georgia Tbilisi https://flagcdn.com/ge.svg
+ArrayfunctionsTask.html:44 Germany Berlin https://flagcdn.com/de.svg
+ArrayfunctionsTask.html:44 Ghana Accra https://flagcdn.com/gh.svg
+ArrayfunctionsTask.html:44 Gibraltar Gibraltar https://flagcdn.com/gi.svg
+ArrayfunctionsTask.html:44 Greece Athens https://flagcdn.com/gr.svg
+ArrayfunctionsTask.html:44 Greenland Nuuk https://flagcdn.com/gl.svg
+ArrayfunctionsTask.html:44 Grenada St. George's https://flagcdn.com/gd.svg
+ArrayfunctionsTask.html:44 Guadeloupe Basse-Terre https://flagcdn.com/gp.svg
+ArrayfunctionsTask.html:44 Guam Hagåtña https://flagcdn.com/gu.svg
+ArrayfunctionsTask.html:44 Guatemala Guatemala City https://flagcdn.com/gt.svg
+ArrayfunctionsTask.html:44 Guernsey St. Peter Port https://flagcdn.com/gg.svg
+ArrayfunctionsTask.html:44 Guinea Conakry https://flagcdn.com/gn.svg
+ArrayfunctionsTask.html:44 Guinea-Bissau Bissau https://flagcdn.com/gw.svg
+ArrayfunctionsTask.html:44 Guyana Georgetown https://flagcdn.com/gy.svg
+ArrayfunctionsTask.html:44 Haiti Port-au-Prince https://flagcdn.com/ht.svg
+ArrayfunctionsTask.html:44 Heard Island and McDonald Islands undefined https://flagcdn.com/hm.svg
+ArrayfunctionsTask.html:44 Vatican City Vatican City https://flagcdn.com/va.svg
+ArrayfunctionsTask.html:44 Honduras Tegucigalpa https://flagcdn.com/hn.svg
+ArrayfunctionsTask.html:44 Hungary Budapest https://flagcdn.com/hu.svg
+ArrayfunctionsTask.html:44 Hong Kong City of Victoria https://flagcdn.com/hk.svg
+ArrayfunctionsTask.html:44 Iceland Reykjavík https://flagcdn.com/is.svg
+ArrayfunctionsTask.html:44 India New Delhi https://flagcdn.com/in.svg
+ArrayfunctionsTask.html:44 Indonesia Jakarta https://flagcdn.com/id.svg
+ArrayfunctionsTask.html:44 Ivory Coast Yamoussoukro https://flagcdn.com/ci.svg
+ArrayfunctionsTask.html:44 Iran (Islamic Republic of) Tehran https://flagcdn.com/ir.svg
+ArrayfunctionsTask.html:44 Iraq Baghdad https://flagcdn.com/iq.svg
+ArrayfunctionsTask.html:44 Ireland Dublin https://flagcdn.com/ie.svg
+ArrayfunctionsTask.html:44 Isle of Man Douglas https://flagcdn.com/im.svg
+ArrayfunctionsTask.html:44 Israel Jerusalem https://flagcdn.com/il.svg
+ArrayfunctionsTask.html:44 Italy Rome https://flagcdn.com/it.svg
+ArrayfunctionsTask.html:44 Jamaica Kingston https://flagcdn.com/jm.svg
+ArrayfunctionsTask.html:44 Japan Tokyo https://flagcdn.com/jp.svg
+ArrayfunctionsTask.html:44 Jersey Saint Helier https://flagcdn.com/je.svg
+ArrayfunctionsTask.html:44 Jordan Amman https://flagcdn.com/jo.svg
+ArrayfunctionsTask.html:44 Kazakhstan Nur-Sultan https://flagcdn.com/kz.svg
+ArrayfunctionsTask.html:44 Kenya Nairobi https://flagcdn.com/ke.svg
+ArrayfunctionsTask.html:44 Kiribati South Tarawa https://flagcdn.com/ki.svg
+ArrayfunctionsTask.html:44 Kuwait Kuwait City https://flagcdn.com/kw.svg
+ArrayfunctionsTask.html:44 Kyrgyzstan Bishkek https://flagcdn.com/kg.svg
+ArrayfunctionsTask.html:44 Lao People's Democratic Republic Vientiane https://flagcdn.com/la.svg
+ArrayfunctionsTask.html:44 Latvia Riga https://flagcdn.com/lv.svg
+ArrayfunctionsTask.html:44 Lebanon Beirut https://flagcdn.com/lb.svg
+ArrayfunctionsTask.html:44 Lesotho Maseru https://flagcdn.com/ls.svg
+ArrayfunctionsTask.html:44 Liberia Monrovia https://flagcdn.com/lr.svg
+ArrayfunctionsTask.html:44 Libya Tripoli https://flagcdn.com/ly.svg
+ArrayfunctionsTask.html:44 Liechtenstein Vaduz https://flagcdn.com/li.svg
+ArrayfunctionsTask.html:44 Lithuania Vilnius https://flagcdn.com/lt.svg
+ArrayfunctionsTask.html:44 Luxembourg Luxembourg https://flagcdn.com/lu.svg
+ArrayfunctionsTask.html:44 Macao undefined https://flagcdn.com/mo.svg
+ArrayfunctionsTask.html:44 North Macedonia Skopje https://flagcdn.com/mk.svg
+ArrayfunctionsTask.html:44 Madagascar Antananarivo https://flagcdn.com/mg.svg
+ArrayfunctionsTask.html:44 Malawi Lilongwe https://flagcdn.com/mw.svg
+ArrayfunctionsTask.html:44 Malaysia Kuala Lumpur https://flagcdn.com/my.svg
+ArrayfunctionsTask.html:44 Maldives Malé https://flagcdn.com/mv.svg
+ArrayfunctionsTask.html:44 Mali Bamako https://flagcdn.com/ml.svg
+ArrayfunctionsTask.html:44 Malta Valletta https://flagcdn.com/mt.svg
+ArrayfunctionsTask.html:44 Marshall Islands Majuro https://flagcdn.com/mh.svg
+ArrayfunctionsTask.html:44 Martinique Fort-de-France https://flagcdn.com/mq.svg
+ArrayfunctionsTask.html:44 Mauritania Nouakchott https://flagcdn.com/mr.svg
+ArrayfunctionsTask.html:44 Mauritius Port Louis https://flagcdn.com/mu.svg
+ArrayfunctionsTask.html:44 Mayotte Mamoudzou https://flagcdn.com/yt.svg
+ArrayfunctionsTask.html:44 Mexico Mexico City https://flagcdn.com/mx.svg
+ArrayfunctionsTask.html:44 Micronesia (Federated States of) Palikir https://flagcdn.com/fm.svg
+ArrayfunctionsTask.html:44 Moldova (Republic of) Chișinău https://flagcdn.com/md.svg
+ArrayfunctionsTask.html:44 Monaco Monaco https://flagcdn.com/mc.svg
+ArrayfunctionsTask.html:44 Mongolia Ulan Bator https://flagcdn.com/mn.svg
+ArrayfunctionsTask.html:44 Montenegro Podgorica https://flagcdn.com/me.svg
+ArrayfunctionsTask.html:44 Montserrat Plymouth https://flagcdn.com/ms.svg
+ArrayfunctionsTask.html:44 Morocco Rabat https://flagcdn.com/ma.svg
+ArrayfunctionsTask.html:44 Mozambique Maputo https://flagcdn.com/mz.svg
+ArrayfunctionsTask.html:44 Myanmar Naypyidaw https://flagcdn.com/mm.svg
+ArrayfunctionsTask.html:44 Namibia Windhoek https://flagcdn.com/na.svg
+ArrayfunctionsTask.html:44 Nauru Yaren https://flagcdn.com/nr.svg
+ArrayfunctionsTask.html:44 Nepal Kathmandu https://flagcdn.com/np.svg
+ArrayfunctionsTask.html:44 Netherlands Amsterdam https://flagcdn.com/nl.svg
+ArrayfunctionsTask.html:44 New Caledonia Nouméa https://flagcdn.com/nc.svg
+ArrayfunctionsTask.html:44 New Zealand Wellington https://flagcdn.com/nz.svg
+ArrayfunctionsTask.html:44 Nicaragua Managua https://flagcdn.com/ni.svg
+ArrayfunctionsTask.html:44 Niger Niamey https://flagcdn.com/ne.svg
+ArrayfunctionsTask.html:44 Nigeria Abuja https://flagcdn.com/ng.svg
+ArrayfunctionsTask.html:44 Niue Alofi https://flagcdn.com/nu.svg
+ArrayfunctionsTask.html:44 Norfolk Island Kingston https://flagcdn.com/nf.svg
+ArrayfunctionsTask.html:44 Korea (Democratic People's Republic of) Pyongyang https://flagcdn.com/kp.svg
+ArrayfunctionsTask.html:44 Northern Mariana Islands Saipan https://flagcdn.com/mp.svg
+ArrayfunctionsTask.html:44 Norway Oslo https://flagcdn.com/no.svg
+ArrayfunctionsTask.html:44 Oman Muscat https://flagcdn.com/om.svg
+ArrayfunctionsTask.html:44 Pakistan Islamabad https://flagcdn.com/pk.svg
+ArrayfunctionsTask.html:44 Palau Ngerulmud https://flagcdn.com/pw.svg
+ArrayfunctionsTask.html:44 Palestine, State of Ramallah https://flagcdn.com/ps.svg
+ArrayfunctionsTask.html:44 Panama Panama City https://flagcdn.com/pa.svg
+ArrayfunctionsTask.html:44 Papua New Guinea Port Moresby https://flagcdn.com/pg.svg
+ArrayfunctionsTask.html:44 Paraguay Asunción https://flagcdn.com/py.svg
+ArrayfunctionsTask.html:44 Peru Lima https://flagcdn.com/pe.svg
+ArrayfunctionsTask.html:44 Philippines Manila https://flagcdn.com/ph.svg
+ArrayfunctionsTask.html:44 Pitcairn Adamstown https://flagcdn.com/pn.svg
+ArrayfunctionsTask.html:44 Poland Warsaw https://flagcdn.com/pl.svg
+ArrayfunctionsTask.html:44 Portugal Lisbon https://flagcdn.com/pt.svg
+ArrayfunctionsTask.html:44 Puerto Rico San Juan https://flagcdn.com/pr.svg
+ArrayfunctionsTask.html:44 Qatar Doha https://flagcdn.com/qa.svg
+ArrayfunctionsTask.html:44 Republic of Kosovo Pristina https://flagcdn.com/xk.svg
+ArrayfunctionsTask.html:44 Réunion Saint-Denis https://flagcdn.com/re.svg
+ArrayfunctionsTask.html:44 Romania Bucharest https://flagcdn.com/ro.svg
+ArrayfunctionsTask.html:44 Russian Federation Moscow https://flagcdn.com/ru.svg
+ArrayfunctionsTask.html:44 Rwanda Kigali https://flagcdn.com/rw.svg
+ArrayfunctionsTask.html:44 Saint Barthélemy Gustavia https://flagcdn.com/bl.svg
+ArrayfunctionsTask.html:44 Saint Helena, Ascension and Tristan da Cunha Jamestown https://flagcdn.com/sh.svg
+ArrayfunctionsTask.html:44 Saint Kitts and Nevis Basseterre https://flagcdn.com/kn.svg
+ArrayfunctionsTask.html:44 Saint Lucia Castries https://flagcdn.com/lc.svg
+ArrayfunctionsTask.html:44 Saint Martin (French part) Marigot https://flagcdn.com/mf.svg
+ArrayfunctionsTask.html:44 Saint Pierre and Miquelon Saint-Pierre https://flagcdn.com/pm.svg
+ArrayfunctionsTask.html:44 Saint Vincent and the Grenadines Kingstown https://flagcdn.com/vc.svg
+ArrayfunctionsTask.html:44 Samoa Apia https://flagcdn.com/ws.svg
+ArrayfunctionsTask.html:44 San Marino City of San Marino https://flagcdn.com/sm.svg
+ArrayfunctionsTask.html:44 Sao Tome and Principe São Tomé https://flagcdn.com/st.svg
+ArrayfunctionsTask.html:44 Saudi Arabia Riyadh https://flagcdn.com/sa.svg
+ArrayfunctionsTask.html:44 Senegal Dakar https://flagcdn.com/sn.svg
+ArrayfunctionsTask.html:44 Serbia Belgrade https://flagcdn.com/rs.svg
+ArrayfunctionsTask.html:44 Seychelles Victoria https://flagcdn.com/sc.svg
+ArrayfunctionsTask.html:44 Sierra Leone Freetown https://flagcdn.com/sl.svg
+ArrayfunctionsTask.html:44 Singapore Singapore https://flagcdn.com/sg.svg
+ArrayfunctionsTask.html:44 Sint Maarten (Dutch part) Philipsburg https://flagcdn.com/sx.svg
+ArrayfunctionsTask.html:44 Slovakia Bratislava https://flagcdn.com/sk.svg
+ArrayfunctionsTask.html:44 Slovenia Ljubljana https://flagcdn.com/si.svg
+ArrayfunctionsTask.html:44 Solomon Islands Honiara https://flagcdn.com/sb.svg
+ArrayfunctionsTask.html:44 Somalia Mogadishu https://flagcdn.com/so.svg
+ArrayfunctionsTask.html:44 South Africa Pretoria https://flagcdn.com/za.svg
+ArrayfunctionsTask.html:44 South Georgia and the South Sandwich Islands King Edward Point https://flagcdn.com/gs.svg
+ArrayfunctionsTask.html:44 Korea (Republic of) Seoul https://flagcdn.com/kr.svg
+ArrayfunctionsTask.html:44 Spain Madrid https://flagcdn.com/es.svg
+ArrayfunctionsTask.html:44 Sri Lanka Sri Jayawardenepura Kotte https://flagcdn.com/lk.svg
+ArrayfunctionsTask.html:44 Sudan Khartoum https://flagcdn.com/sd.svg
+ArrayfunctionsTask.html:44 South Sudan Juba https://flagcdn.com/ss.svg
+ArrayfunctionsTask.html:44 Suriname Paramaribo https://flagcdn.com/sr.svg
+ArrayfunctionsTask.html:44 Svalbard and Jan Mayen Longyearbyen https://flagcdn.com/sj.svg
+ArrayfunctionsTask.html:44 Swaziland Mbabane https://flagcdn.com/sz.svg
+ArrayfunctionsTask.html:44 Sweden Stockholm https://flagcdn.com/se.svg
+ArrayfunctionsTask.html:44 Switzerland Bern https://flagcdn.com/ch.svg
+ArrayfunctionsTask.html:44 Syrian Arab Republic Damascus https://flagcdn.com/sy.svg
+ArrayfunctionsTask.html:44 Taiwan Taipei https://flagcdn.com/tw.svg
+ArrayfunctionsTask.html:44 Tajikistan Dushanbe https://flagcdn.com/tj.svg
+ArrayfunctionsTask.html:44 Tanzania, United Republic of Dodoma https://flagcdn.com/tz.svg
+ArrayfunctionsTask.html:44 Thailand Bangkok https://flagcdn.com/th.svg
+ArrayfunctionsTask.html:44 Timor-Leste Dili https://flagcdn.com/tl.svg
+ArrayfunctionsTask.html:44 Togo Lomé https://flagcdn.com/tg.svg
+ArrayfunctionsTask.html:44 Tokelau Fakaofo https://flagcdn.com/tk.svg
+ArrayfunctionsTask.html:44 Tonga Nuku'alofa https://flagcdn.com/to.svg
+ArrayfunctionsTask.html:44 Trinidad and Tobago Port of Spain https://flagcdn.com/tt.svg
+ArrayfunctionsTask.html:44 Tunisia Tunis https://flagcdn.com/tn.svg
+ArrayfunctionsTask.html:44 Turkey Ankara https://flagcdn.com/tr.svg
+ArrayfunctionsTask.html:44 Turkmenistan Ashgabat https://flagcdn.com/tm.svg
+ArrayfunctionsTask.html:44 Turks and Caicos Islands Cockburn Town https://flagcdn.com/tc.svg
+ArrayfunctionsTask.html:44 Tuvalu Funafuti https://flagcdn.com/tv.svg
+ArrayfunctionsTask.html:44 Uganda Kampala https://flagcdn.com/ug.svg
+ArrayfunctionsTask.html:44 Ukraine Kyiv https://flagcdn.com/ua.svg
+ArrayfunctionsTask.html:44 United Arab Emirates Abu Dhabi https://flagcdn.com/ae.svg
+ArrayfunctionsTask.html:44 United Kingdom of Great Britain and Northern Ireland London https://flagcdn.com/gb.svg
+ArrayfunctionsTask.html:44 United States of America Washington, D.C. https://flagcdn.com/us.svg
+ArrayfunctionsTask.html:44 Uruguay Montevideo https://flagcdn.com/uy.svg
+ArrayfunctionsTask.html:44 Uzbekistan Tashkent https://flagcdn.com/uz.svg
+ArrayfunctionsTask.html:44 Vanuatu Port Vila https://flagcdn.com/vu.svg
+ArrayfunctionsTask.html:44 Venezuela (Bolivarian Republic of) Caracas https://flagcdn.com/ve.svg
+ArrayfunctionsTask.html:44 Vietnam Hanoi https://flagcdn.com/vn.svg
+ArrayfunctionsTask.html:44 Wallis and Futuna Mata-Utu https://flagcdn.com/wf.svg
+ArrayfunctionsTask.html:44 Western Sahara El Aaiún https://flagcdn.com/eh.svg
+ArrayfunctionsTask.html:44 Yemen Sana'a https://flagcdn.com/ye.svg
+ArrayfunctionsTask.html:44 Zambia Lusaka https://flagcdn.com/zm.svg
+ArrayfunctionsTask.html:44 Zimbabwe Harare https://flagcdn.com/zw.svg
+
+d
+===
+ArrayfunctionsTask.html:49 7759438109
+
+e
+===
+ArrayfunctionsTask.html:80 (18) ['American Samoa', 'Bonaire, Sint Eustatius and Saba', 'British Indian Ocean Territory', 'Virgin Islands (British)', 'Virgin Islands (U.S.)', 'Cambodia', 'Ecuador', 'El Salvador', 'Guam', 'Marshall Islands', 'Micronesia (Federated States of)', 'Northern Mariana Islands', 'Palau', 'Panama', 'Puerto Rico', 'Timor-Leste', 'Turks and Caicos Islands', 'United States of America']
+
